@@ -1,3 +1,5 @@
+![](demo.gif)
+
 This project wraps OpenAI's completion endpoint in a Python command line application, returning the text with character-by-character streaming for a more organic experience.
 
 ## Setup

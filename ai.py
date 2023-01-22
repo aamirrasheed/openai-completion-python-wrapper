@@ -14,7 +14,7 @@ openai.api_key = env_config.get('OPENAI_API_KEY')
 # this will read the argument for temperature
 parser = argparse.ArgumentParser()
 parser.add_argument('--temperature', type=float, default=0.5)
-parser.add_argument('--max_tokens', type=float, default=100)
+parser.add_argument('--max_tokens', type=int, default=100)
 
 def write_one_character_at_a_time(text):
     # generate a list of random numbers between 0.01 and 0.1

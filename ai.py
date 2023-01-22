@@ -4,14 +4,17 @@ import sys
 import time
 import random
 import argparse
-from dotenv import load_dotenv
 
-load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+from decouple import Config, RepositoryEnv
+
+DOTENV_FILE = './.env'
+env_config = Config(RepositoryEnv(DOTENV_FILE))
+openai.api_key = env_config.get('OPENAI_API_KEY')
 
 # this will read the argument for temperature
 parser = argparse.ArgumentParser()
 parser.add_argument('--temperature', type=float, default=0.5)
+parser.add_argument('--max_tokens', type=float, default=100)
 
 def write_one_character_at_a_time(text):
     # generate a list of random numbers between 0.01 and 0.1
@@ -29,7 +32,7 @@ while(True):
         engine="davinci",
         prompt=prompt,
         temperature=parser.parse_args().temperature,
-        max_tokens=50,
+        max_tokens=parser.parse_args().max_tokens,
         presence_penalty=0.6,
     )
     write_one_character_at_a_time(response.choices[0].text)
